@@ -10,8 +10,10 @@ I've been using [The Event Guide](https://github.com/notify-rs/notify/wiki/The-E
 
 - AFAIK, MacOS filesystem operations are _waaay slower_ than in other platforms. the first `mkdir` command may not be completed before  `Deno.watchFs` is being used, _i.e._ this is why it may first emit a `create` event for the watched source.
 - On Windows, `modify` events can be both content and metadata changes (file size included), you may need to periodically de-duplicate `modify` events.
-- Linux is the only OS granted with `access` events and `modify` events for renamed entries (including two paths)
+- Linux is the only OS granted with `access` events and `modify` events for renamed entries (including two paths).
 - If your use case is tracking files, consider using `walkSync` to retrieve existing entries when running `Deno.watchFs`, then when new folders gets added or when some `modify` event happens with a folder (this can be either renames or removals), because folder items' events won't happen.
+
+## Behaviors
 
 ### Adding a new file
 
