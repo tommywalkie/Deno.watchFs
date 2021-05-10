@@ -176,11 +176,13 @@ Deno.copyFileSync(join(path, 'A.txt'), join(path, 'B.txt'))
 
 ### Copy a folder
 
+If the copied folder is located outside the watching scope, folder items will also emit events like if they were created into the new folder. Otherwise, you may need to walk the folder and register items.
+
 ```js
 import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
 import { copySync } from 'https://deno.land/std@0.95.0/fs/mod.ts'
 
-/* Folder 'foo' already exists... */
+Deno.mkdirSync(join(path, 'foo'), { recursive: true })
 copySync(join(path, 'foo'), join(path, 'bar'))
 ```
 
@@ -189,6 +191,10 @@ copySync(join(path, 'foo'), join(path, 'bar'))
 ```js
 [
   /* All platforms */
+  {
+    kind: "create",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/7ml0dad18/foo" ]
+  },
   {
     kind: "create",
     paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/nk89mg2j0/bar" ]
@@ -231,7 +237,7 @@ moveSync(join(path, 'A.txt'), join(path, 'foo/A.txt'), { overwrite: true })
 
 ### Move a folder
 
-If the folder came from outside the watching scope, folder items will also emit events like if they were created.
+Unlike folder copies, if the copied folder is located outside the watching scope, folder items won't emit events, so you may have to walk the new folder and register items.
 
 ```js
 Deno.mkdirSync(join(path, 'foo'), { recursive: true })
