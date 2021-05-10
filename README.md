@@ -25,7 +25,7 @@ deno test -A --unstable
 
 ## Behaviors
 
-### Adding a new file
+### Add a new file
 
 This is the equivalent of creating a file entry and saving new content (`echo "Hello world" > A.txt`). 
 
@@ -56,7 +56,7 @@ Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
 ]
 ```
 
-### Editing a file
+### Edit a file
 
 Note that, on MacOS, file edits are preceded by a `create` event for some reason.
 
@@ -107,7 +107,7 @@ Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
 ]
 ```
 
-### Adding a new folder
+### Add a new folder
 
 ```js
 import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
@@ -365,6 +365,83 @@ Deno.renameSync(join(path, 'foo'), join(path, 'bar'))
       "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/1k8v51qih/foo",
       "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/1k8v51qih/bar"
     ]
+  }
+]
+```
+
+### Remove a file
+
+```js
+import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
+
+Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
+Deno.removeSync(join(path, 'A.txt'))
+```
+
+**Result:**
+
+```js
+[
+  /* All platforms */
+  {
+    kind: "create",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/0c34facb9/A.txt" ]
+  },
+  {
+    kind: "modify",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/0c34facb9/A.txt" ]
+  },
+  /* Only on Linux */
+  {
+    kind: "access",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/0c34facb9/A.txt" ]
+  },
+  /* All platforms */
+  {
+    kind: "remove",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/0c34facb9/A.txt" ]
+  }
+]
+```
+
+### Remove a folder
+
+Folder items gets removed first and emit `remove` events, then the folder gets removed and emits a `remove` event.
+
+```js
+import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
+
+Deno.mkdirSync(join(path, 'foo'), { recursive: true })
+Deno.writeTextFileSync(join(path, 'foo/A.txt'), 'Hello world')
+Deno.removeSync(join(path, 'foo'), { recursive: true })
+```
+
+**Result:**
+
+```js
+[
+  /* All platforms */
+  {
+    kind: "create",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/wqaw5fl3l/foo" ]
+  },
+  {
+    kind: "modify",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/wqaw5fl3l/foo/A.txt" ]
+  },
+  /* Only on Linux */
+  {
+    kind: "access",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/wqaw5fl3l/foo/A.txt" ]
+  },
+  /* All platforms */
+  {
+    kind: "remove",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/wqaw5fl3l/foo/A.txt" ]
+  },
+  {
+    kind: "remove",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/wqaw5fl3l/foo" ]
   }
 ]
 ```
