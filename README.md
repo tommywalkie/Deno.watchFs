@@ -78,7 +78,7 @@ Note that, on MacOS, file edits are preceded by a `create` event for some reason
 ```js
 import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
 
-Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
+/* Assuming A.txt already exists */
 Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
 ```
 
@@ -86,20 +86,6 @@ Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
 
 ```js
 [
-  /* All platforms */
-  {
-    kind: "create",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/jejw8egqf/A.txt" ]
-  },
-  {
-    kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/jejw8egqf/A.txt" ]
-  },
-  /* Only on Linux */
-  {
-    kind: "access",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/jejw8egqf/A.txt" ]
-  }
   /* Only on MacOS */
   {
     kind: "create",
