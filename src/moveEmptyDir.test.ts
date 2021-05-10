@@ -1,7 +1,7 @@
 import { expect, it, join, moveSync } from '../deps.ts'
 import { track } from './utils.ts'
 
-it('should be able to track moved files', async () => {
+it('should be able to track moved empty folders', async () => {
     const events = await track((path: string) => {
         Deno.mkdirSync(join(path, 'foo'), { recursive: true })
         Deno.mkdirSync(join(path, 'bar'), { recursive: true })
