@@ -143,16 +143,16 @@ Deno.copyFileSync(join(path, 'A.txt'), join(path, 'B.txt'))
   /* All platforms */
   {
     kind: "create",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/j3dset8ut/A.txt" ]
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/e9izorrnz/A.txt" ]
   },
   {
     kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/j3dset8ut/A.txt" ]
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/e9izorrnz/A.txt" ]
   },
   /* Only on Linux */
   {
     kind: "access",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/j3dset8ut/A.txt" ]
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/e9izorrnz/A.txt" ]
   }
   /* All platforms */
   {
