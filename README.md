@@ -4,6 +4,21 @@ The hereby repo strives to document the behavior of `Deno.watchFs` (which is bas
 
 Feel free to use it as reference when designing tools which rely on file watching.
 
+- [Notes](https://github.com/tommywalkie/Deno.watchFs#notes)
+- [Testing](https://github.com/tommywalkie/Deno.watchFs#testing)
+- [Behaviors](https://github.com/tommywalkie/Deno.watchFs#behaviors)
+  - [Add a new file](https://github.com/tommywalkie/Deno.watchFs#add-a-new-file)
+  - [Edit file](https://github.com/tommywalkie/Deno.watchFs#edit-a-file)
+  - [Add a new folder](https://github.com/tommywalkie/Deno.watchFs#add-a-new-folder)
+  - [Copy a file](https://github.com/tommywalkie/Deno.watchFs#copy-a-file)
+  - [Copy a folder](https://github.com/tommywalkie/Deno.watchFs#copy-a-folder)
+  - [Move a file](https://github.com/tommywalkie/Deno.watchFs#move-a-file)
+  - [Move a folder](https://github.com/tommywalkie/Deno.watchFs#move-a-folder)
+  - [Rename a file](https://github.com/tommywalkie/Deno.watchFs#rename-a-file)
+  - [Rename a folder](https://github.com/tommywalkie/Deno.watchFs#rename-a-folder)
+  - [Remove a file](https://github.com/tommywalkie/Deno.watchFs#remove-a-file)
+  - [Remove a folder](https://github.com/tommywalkie/Deno.watchFs#remove-a-folder)
+
 ## Notes
 
 I've been using [The Event Guide](https://github.com/notify-rs/notify/wiki/The-Event-Guide#platform-specific-behaviour) from `notify` wiki, but here a few notes from my tests:
