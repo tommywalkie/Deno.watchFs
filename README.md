@@ -8,11 +8,12 @@ Feel free to use it as reference when designing tools which rely on file watchin
 
 I've been using [The Event Guide](https://github.com/notify-rs/notify/wiki/The-Event-Guide#platform-specific-behaviour) from `notify` wiki, but here a few notes from my tests:
 
-- Obviously, path format in `event.paths` depends of the OS (slashes, antislashes, etc.) 
+- Obviously, path format in `event.paths` depends of the OS (slashes, antislashes, etc.).
+- `Deno.FsEvent` doesn't provide stats so you'll' need to call `lstatSync` for each event to process `event.paths` entries.
 - From CI logs, MacOS filesystem operations are _way slower_. the first `mkdir` command may not be completed before  `Deno.watchFs` is being used, _i.e._ this is why it may first emit a `create` event for the watched source.
 - On Windows, `modify` events can be both content and metadata changes (file size included), you may need to periodically de-duplicate `modify` events.
 - Linux is the only OS granted with `access` events and `modify` events including two paths.
-- If your use case is tracking files, consider using `walkSync` to retrieve existing entries when running `Deno.watchFs`, then when new folders gets added or when some `modify` event happens with a folder (this can be either renames or removals), because folder items' events won't happen.
+- If your use case is tracking files, consider using `walkSync` to retrieve existing entries when running `Deno.watchFs`, then when new folders gets added and when some `modify` event happens with a folder (this can be either moves, renames or removals), because folder items' events won't happen.
 
 ## Testing
 
@@ -176,13 +177,14 @@ Deno.copyFileSync(join(path, 'A.txt'), join(path, 'B.txt'))
 
 ### Copy a folder
 
-If the copied folder is located outside the watching scope, folder items will also emit events like if they were created into the new folder. Otherwise, you may need to walk the folder and register items.
+Folder items will also emit events like if they were created into the new folder, with one additional `modify` event.
 
 ```js
 import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
 import { copySync } from 'https://deno.land/std@0.95.0/fs/mod.ts'
 
 Deno.mkdirSync(join(path, 'foo'), { recursive: true })
+Deno.writeTextFileSync(join(path, 'foo/A.txt'), 'Hello world')
 copySync(join(path, 'foo'), join(path, 'bar'))
 ```
 
@@ -193,11 +195,42 @@ copySync(join(path, 'foo'), join(path, 'bar'))
   /* All platforms */
   {
     kind: "create",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/7ml0dad18/foo" ]
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/nk89mg2j0/foo" ]
   },
   {
     kind: "create",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/nk89mg2j0/foo/A.txt" ]
+  },
+  {
+    kind: "modify",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/nk89mg2j0/foo/A.txt" ]
+  },
+  /* Only on Linux */
+  {
+    kind: "access",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/nk89mg2j0/A.txt" ]
+  },
+  /* All platforms */
+  {
+    kind: "create",
     paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/nk89mg2j0/bar" ]
+  },
+  {
+    kind: "create",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/nk89mg2j0/bar/A.txt" ]
+  },
+  {
+    kind: "modify",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/nk89mg2j0/bar/A.txt" ]
+  },
+  {
+    kind: "modify",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/nk89mg2j0/bar/A.txt" ]
+  },
+  /* Only on Linux */
+  {
+    kind: "access",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/nk89mg2j0/bar/A.txt" ]
   }
 ]
 ```
@@ -237,7 +270,7 @@ moveSync(join(path, 'A.txt'), join(path, 'foo/A.txt'), { overwrite: true })
 
 ### Move a folder
 
-Unlike folder copies, if the copied folder is located outside the watching scope, folder items won't emit events, so you may have to walk the new folder and register items.
+Unlike folder copies, folder items won't emit events, so you may have to walk the new folder and register items.
 
 ```js
 Deno.mkdirSync(join(path, 'foo'), { recursive: true })
