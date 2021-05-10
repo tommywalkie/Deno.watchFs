@@ -4,7 +4,6 @@ import { track } from './utils.ts'
 it('should be able to track newly copied empty folders', async () => {
     const events = await track((path: string) => {
         Deno.mkdirSync(join(path, 'foo'), { recursive: true })
-        Deno.writeTextFileSync(join(path, 'foo', 'A.txt'), 'Hello world')
         copySync(join(path, 'foo'), join(path, 'bar'))
     })
     console.log(events)
