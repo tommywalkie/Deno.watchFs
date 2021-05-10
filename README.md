@@ -256,6 +256,8 @@ copySync(join(path, 'foo'), join(path, 'bar'))
 import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
 import { moveSync } from 'https://deno.land/std@0.95.0/fs/mod.ts'
 
+Deno.mkdirSync(join(path, 'foo'), { recursive: true })
+Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
 moveSync(join(path, 'A.txt'), join(path, 'foo/A.txt'), { overwrite: true })
 ```
 
@@ -263,6 +265,24 @@ moveSync(join(path, 'A.txt'), join(path, 'foo/A.txt'), { overwrite: true })
 
 ```js
 [
+  /* All platforms */
+  {
+    kind: "create",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/j3dset8ut/foo" ]
+  },
+  {
+    kind: "create",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/j3dset8ut/A.txt" ]
+  },
+  {
+    kind: "modify",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/j3dset8ut/A.txt" ]
+  },
+  /* Only on Linux */
+  {
+    kind: "access",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/j3dset8ut/A.txt" ]
+  },
   /* All platforms */
   {
     kind: "modify",
@@ -289,6 +309,7 @@ Unlike folder copies, folder items won't emit events, so you may have to walk th
 
 ```js
 Deno.mkdirSync(join(path, 'foo'), { recursive: true })
+Deno.mkdirSync(join(path, 'bar'), { recursive: true })
 moveSync(join(path, 'foo'), join(path, 'bar/foo/'), { overwrite: true })
 ```
 
@@ -297,6 +318,14 @@ moveSync(join(path, 'foo'), join(path, 'bar/foo/'), { overwrite: true })
 ```js
 [
   /* All platforms */
+  {
+    kind: "create",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/k5nl2tstq/foo" ]
+  },
+  {
+    kind: "create",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/k5nl2tstq/bar" ]
+  },
   {
     kind: "modify",
     paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/k5nl2tstq/foo" ]
