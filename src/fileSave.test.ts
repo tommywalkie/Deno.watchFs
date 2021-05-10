@@ -3,7 +3,7 @@ import { track } from './utils.ts'
 
 it('should be able to track file saves', async () => {
     const events = await track((path: string) => {
-        Deno.writeTextFileSync(join(path, 'A.txt'), 'Foo bar')
+        Deno.writeTextFileSync(join(path, 'A.txt'), '')
         Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
     })
     console.log(events)

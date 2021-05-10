@@ -73,12 +73,10 @@ Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
 
 ### Edit a file
 
-Note that, on MacOS, file edits are preceded by a `create` event for some reason.
-
 ```js
 import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
 
-/* Assuming A.txt already exists */
+Deno.writeTextFileSync(join(path, 'A.txt'), '')
 Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
 ```
 
@@ -86,12 +84,11 @@ Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
 
 ```js
 [
-  /* Only on MacOS */
+  /* All platforms */
   {
     kind: "create",
-    paths: [ "/Users/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/jejw8egqf/A.txt" ]
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/jejw8egqf/A.txt" ]
   },
-  /* All platforms */
   {
     kind: "modify",
     paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/jejw8egqf/A.txt" ]
