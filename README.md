@@ -47,7 +47,7 @@ This is the equivalent of creating a file entry and saving new content (`echo "H
 ```js
 import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
 
-Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
+Deno.writeTextFileSync(join('<PATH>', 'A.txt'), 'Hello world')
 ```
 
 **Result:**
@@ -57,16 +57,16 @@ Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
   /* All platforms */
   {
     kind: "create",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/j3dset8ut/A.txt" ]
+    paths: [ "<PATH>/__TEST__/j3dset8ut/A.txt" ]
   },
   {
     kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/j3dset8ut/A.txt" ]
+    paths: [ "<PATH>/__TEST__/j3dset8ut/A.txt" ]
   },
   /* Only on Linux */
   {
     kind: "access",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/j3dset8ut/A.txt" ]
+    paths: [ "<PATH>/__TEST__/j3dset8ut/A.txt" ]
   }
 ]
 ```
@@ -76,8 +76,8 @@ Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
 ```js
 import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
 
-Deno.writeTextFileSync(join(path, 'A.txt'), '')
-Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
+Deno.writeTextFileSync(join('<PATH>', 'A.txt'), '')
+Deno.writeTextFileSync(join('<PATH>', 'A.txt'), 'Hello world')
 ```
 
 **Result:**
@@ -87,20 +87,26 @@ Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
   /* All platforms */
   {
     kind: "create",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/jejw8egqf/A.txt" ]
-  },
-  {
-    kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/jejw8egqf/A.txt" ]
-  },
-  {
-    kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/jejw8egqf/A.txt" ]
+    paths: [ "<PATH>/__TEST__/jejw8egqf/A.txt" ]
   },
   /* Only on Linux */
   {
     kind: "access",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/jejw8egqf/A.txt" ]
+    paths: [ "<PATH>/__TEST__/jejw8egqf/A.txt" ]
+  },
+  /* All platforms */
+  {
+    kind: "modify",
+    paths: [ "<PATH>/__TEST__/jejw8egqf/A.txt" ]
+  },
+  {
+    kind: "modify",
+    paths: [ "<PATH>/__TEST__/jejw8egqf/A.txt" ]
+  },
+  /* Only on Linux */
+  {
+    kind: "access",
+    paths: [ "<PATH>/__TEST__/jejw8egqf/A.txt" ]
   }
 ]
 ```
@@ -110,7 +116,7 @@ Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
 ```js
 import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
 
-Deno.mkdirSync(join(path, 'foo'), { recursive: true })
+Deno.mkdirSync(join('<PATH>', 'foo'), { recursive: true })
 ```
 
 **Result:**
@@ -120,7 +126,7 @@ Deno.mkdirSync(join(path, 'foo'), { recursive: true })
   /* All platforms */
   {
     kind: "create",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/7ml0dad18/foo" ]
+    paths: [ "<PATH>/__TEST__/7ml0dad18/foo" ]
   }
 ]
 ```
@@ -130,8 +136,8 @@ Deno.mkdirSync(join(path, 'foo'), { recursive: true })
 ```js
 import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
 
-Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
-Deno.copyFileSync(join(path, 'A.txt'), join(path, 'B.txt'))
+Deno.writeTextFileSync(join('<PATH>', 'A.txt'), 'Hello world')
+Deno.copyFileSync(join('<PATH>', 'A.txt'), join('<PATH>', 'B.txt'))
 ```
 
 **Result:**
@@ -141,34 +147,34 @@ Deno.copyFileSync(join(path, 'A.txt'), join(path, 'B.txt'))
   /* All platforms */
   {
     kind: "create",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/e9izorrnz/A.txt" ]
+    paths: [ "<PATH>/__TEST__/e9izorrnz/A.txt" ]
   },
   {
     kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/e9izorrnz/A.txt" ]
+    paths: [ "<PATH>/__TEST__/e9izorrnz/A.txt" ]
   },
   /* Only on Linux */
   {
     kind: "access",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/e9izorrnz/A.txt" ]
+    paths: [ "<PATH>/__TEST__/e9izorrnz/A.txt" ]
   }
   /* All platforms */
   {
     kind: "create",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/e9izorrnz/B.txt" ]
+    paths: [ "<PATH>/__TEST__/e9izorrnz/B.txt" ]
   },
   {
     kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/e9izorrnz/B.txt" ]
+    paths: [ "<PATH>/__TEST__/e9izorrnz/B.txt" ]
   },
   {
     kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/e9izorrnz/B.txt" ]
+    paths: [ "<PATH>/__TEST__/e9izorrnz/B.txt" ]
   },
   /* Only on Linux */
   {
     kind: "access",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/e9izorrnz/B.txt" ]
+    paths: [ "<PATH>/__TEST__/e9izorrnz/B.txt" ]
   }
 ]
 ```
@@ -181,9 +187,9 @@ Folder items will also emit events like if they were created into the new folder
 import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
 import { copySync } from 'https://deno.land/std@0.95.0/fs/mod.ts'
 
-Deno.mkdirSync(join(path, 'foo'), { recursive: true })
-Deno.writeTextFileSync(join(path, 'foo/A.txt'), 'Hello world')
-copySync(join(path, 'foo'), join(path, 'bar'))
+Deno.mkdirSync(join('<PATH>', 'foo'), { recursive: true })
+Deno.writeTextFileSync(join('<PATH>', 'foo/A.txt'), 'Hello world')
+copySync(join('<PATH>', 'foo'), join('<PATH>', 'bar'))
 ```
 
 **Result:**
@@ -193,42 +199,42 @@ copySync(join(path, 'foo'), join(path, 'bar'))
   /* All platforms */
   {
     kind: "create",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/nk89mg2j0/foo" ]
+    paths: [ "<PATH>/__TEST__/nk89mg2j0/foo" ]
   },
   {
     kind: "create",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/nk89mg2j0/foo/A.txt" ]
+    paths: [ "<PATH>/__TEST__/nk89mg2j0/foo/A.txt" ]
   },
   {
     kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/nk89mg2j0/foo/A.txt" ]
+    paths: [ "<PATH>/__TEST__/nk89mg2j0/foo/A.txt" ]
   },
   /* Only on Linux */
   {
     kind: "access",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/nk89mg2j0/A.txt" ]
+    paths: [ "<PATH>/__TEST__/nk89mg2j0/A.txt" ]
   },
   /* All platforms */
   {
     kind: "create",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/nk89mg2j0/bar" ]
+    paths: [ "<PATH>/__TEST__/nk89mg2j0/bar" ]
   },
   {
     kind: "create",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/nk89mg2j0/bar/A.txt" ]
+    paths: [ "<PATH>/__TEST__/nk89mg2j0/bar/A.txt" ]
   },
   {
     kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/nk89mg2j0/bar/A.txt" ]
+    paths: [ "<PATH>/__TEST__/nk89mg2j0/bar/A.txt" ]
   },
   {
     kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/nk89mg2j0/bar/A.txt" ]
+    paths: [ "<PATH>/__TEST__/nk89mg2j0/bar/A.txt" ]
   },
   /* Only on Linux */
   {
     kind: "access",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/nk89mg2j0/bar/A.txt" ]
+    paths: [ "<PATH>/__TEST__/nk89mg2j0/bar/A.txt" ]
   }
 ]
 ```
@@ -239,9 +245,9 @@ copySync(join(path, 'foo'), join(path, 'bar'))
 import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
 import { moveSync } from 'https://deno.land/std@0.95.0/fs/mod.ts'
 
-Deno.mkdirSync(join(path, 'foo'), { recursive: true })
-Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
-moveSync(join(path, 'A.txt'), join(path, 'foo/A.txt'), { overwrite: true })
+Deno.mkdirSync(join('<PATH>', 'foo'), { recursive: true })
+Deno.writeTextFileSync(join('<PATH>', 'A.txt'), 'Hello world')
+moveSync(join('<PATH>', 'A.txt'), join('<PATH>', 'foo/A.txt'), { overwrite: true })
 ```
 
 **Result:**
@@ -251,36 +257,36 @@ moveSync(join(path, 'A.txt'), join(path, 'foo/A.txt'), { overwrite: true })
   /* All platforms */
   {
     kind: "create",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/j3dset8ut/foo" ]
+    paths: [ "<PATH>/__TEST__/j3dset8ut/foo" ]
   },
   {
     kind: "create",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/j3dset8ut/A.txt" ]
+    paths: [ "<PATH>/__TEST__/j3dset8ut/A.txt" ]
   },
   {
     kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/j3dset8ut/A.txt" ]
+    paths: [ "<PATH>/__TEST__/j3dset8ut/A.txt" ]
   },
   /* Only on Linux */
   {
     kind: "access",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/j3dset8ut/A.txt" ]
+    paths: [ "<PATH>/__TEST__/j3dset8ut/A.txt" ]
   },
   /* All platforms */
   {
     kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/i3h6cswpt/A.txt" ]
+    paths: [ "<PATH>/__TEST__/i3h6cswpt/A.txt" ]
   },
   {
     kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/i3h6cswpt/foo/A.txt" ]
+    paths: [ "<PATH>/__TEST__/i3h6cswpt/foo/A.txt" ]
   },
   /* Only on Linux */
   {
     kind: "modify",
     paths: [
-      "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/i3h6cswpt/A.txt",
-      "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/i3h6cswpt/foo/A.txt"
+      "<PATH>/__TEST__/i3h6cswpt/A.txt",
+      "<PATH>/__TEST__/i3h6cswpt/foo/A.txt"
     ]
   }
 ]
@@ -291,9 +297,9 @@ moveSync(join(path, 'A.txt'), join(path, 'foo/A.txt'), { overwrite: true })
 Unlike folder copies, folder items won't emit events, so you may have to walk the new folder and register items.
 
 ```js
-Deno.mkdirSync(join(path, 'foo'), { recursive: true })
-Deno.mkdirSync(join(path, 'bar'), { recursive: true })
-moveSync(join(path, 'foo'), join(path, 'bar/foo/'), { overwrite: true })
+Deno.mkdirSync(join('<PATH>', 'foo'), { recursive: true })
+Deno.mkdirSync(join('<PATH>', 'bar'), { recursive: true })
+moveSync(join('<PATH>', 'foo'), join('<PATH>', 'bar/foo/'), { overwrite: true })
 ```
 
 **Result:**
@@ -303,26 +309,26 @@ moveSync(join(path, 'foo'), join(path, 'bar/foo/'), { overwrite: true })
   /* All platforms */
   {
     kind: "create",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/k5nl2tstq/foo" ]
+    paths: [ "<PATH>/__TEST__/k5nl2tstq/foo" ]
   },
   {
     kind: "create",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/k5nl2tstq/bar" ]
+    paths: [ "<PATH>/__TEST__/k5nl2tstq/bar" ]
   },
   {
     kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/k5nl2tstq/foo" ]
+    paths: [ "<PATH>/__TEST__/k5nl2tstq/foo" ]
   },
   {
     kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/k5nl2tstq/bar/foo" ]
+    paths: [ "<PATH>/__TEST__/k5nl2tstq/bar/foo" ]
   },
   /* Only on Linux */
   {
     kind: "modify",
     paths: [
-      "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/k5nl2tstq/foo",
-      "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/k5nl2tstq/bar/foo"
+      "<PATH>/__TEST__/k5nl2tstq/foo",
+      "<PATH>/__TEST__/k5nl2tstq/bar/foo"
     ]
   }
 ]
@@ -333,8 +339,8 @@ moveSync(join(path, 'foo'), join(path, 'bar/foo/'), { overwrite: true })
 ```js
 import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
 
-Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
-Deno.renameSync(join(path, 'A.txt'), join(path, 'B.txt'))
+Deno.writeTextFileSync(join('<PATH>', 'A.txt'), 'Hello world')
+Deno.renameSync(join('<PATH>', 'A.txt'), join('<PATH>', 'B.txt'))
 ```
 
 **Result:**
@@ -344,32 +350,32 @@ Deno.renameSync(join(path, 'A.txt'), join(path, 'B.txt'))
   /* All platforms */
   {
     kind: "create",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/omi3xk5p4/A.txt" ]
+    paths: [ "<PATH>/__TEST__/omi3xk5p4/A.txt" ]
   },
   {
     kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/omi3xk5p4/A.txt" ]
+    paths: [ "<PATH>/__TEST__/omi3xk5p4/A.txt" ]
   },
   /* Only on Linux */
   {
     kind: "access",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/omi3xk5p4/A.txt" ]
+    paths: [ "<PATH>/__TEST__/omi3xk5p4/A.txt" ]
   },
   /* All platforms */
   {
     kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/omi3xk5p4/A.txt" ]
+    paths: [ "<PATH>/__TEST__/omi3xk5p4/A.txt" ]
   },
   {
     kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/omi3xk5p4/B.txt" ]
+    paths: [ "<PATH>/__TEST__/omi3xk5p4/B.txt" ]
   },
   /* Only on Linux */
   {
     kind: "modify",
     paths: [
-      "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/omi3xk5p4/A.txt",
-      "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/omi3xk5p4/B.txt"
+      "<PATH>/__TEST__/omi3xk5p4/A.txt",
+      "<PATH>/__TEST__/omi3xk5p4/B.txt"
     ]
   }
 ]
@@ -382,8 +388,8 @@ Note that only the folder will emit events, while folder items won't.
 ```js
 import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
 
-Deno.mkdirSync(join(path, 'foo'), { recursive: true })
-Deno.renameSync(join(path, 'foo'), join(path, 'bar'))
+Deno.mkdirSync(join('<PATH>', 'foo'), { recursive: true })
+Deno.renameSync(join('<PATH>', 'foo'), join('<PATH>', 'bar'))
 ```
 
 **Result:**
@@ -393,22 +399,22 @@ Deno.renameSync(join(path, 'foo'), join(path, 'bar'))
   /* All platforms */
   {
     kind: "create",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/1k8v51qih/foo" ]
+    paths: [ "<PATH>/__TEST__/1k8v51qih/foo" ]
   },
   {
     kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/1k8v51qih/foo" ]
+    paths: [ "<PATH>/__TEST__/1k8v51qih/foo" ]
   },
   {
     kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/1k8v51qih/bar" ]
+    paths: [ "<PATH>/__TEST__/1k8v51qih/bar" ]
   },
   /* Only on Linux */
   {
     kind: "modify",
     paths: [
-      "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/1k8v51qih/foo",
-      "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/1k8v51qih/bar"
+      "<PATH>/__TEST__/1k8v51qih/foo",
+      "<PATH>/__TEST__/1k8v51qih/bar"
     ]
   }
 ]
@@ -419,8 +425,8 @@ Deno.renameSync(join(path, 'foo'), join(path, 'bar'))
 ```js
 import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
 
-Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
-Deno.removeSync(join(path, 'A.txt'))
+Deno.writeTextFileSync(join('<PATH>', 'A.txt'), 'Hello world')
+Deno.removeSync(join('<PATH>', 'A.txt'))
 ```
 
 **Result:**
@@ -430,21 +436,21 @@ Deno.removeSync(join(path, 'A.txt'))
   /* All platforms */
   {
     kind: "create",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/0c34facb9/A.txt" ]
+    paths: [ "<PATH>/__TEST__/0c34facb9/A.txt" ]
   },
   {
     kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/0c34facb9/A.txt" ]
+    paths: [ "<PATH>/__TEST__/0c34facb9/A.txt" ]
   },
   /* Only on Linux */
   {
     kind: "access",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/0c34facb9/A.txt" ]
+    paths: [ "<PATH>/__TEST__/0c34facb9/A.txt" ]
   },
   /* All platforms */
   {
     kind: "remove",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/0c34facb9/A.txt" ]
+    paths: [ "<PATH>/__TEST__/0c34facb9/A.txt" ]
   }
 ]
 ```
@@ -456,9 +462,9 @@ Folder items gets removed first and emit `remove` events, then the folder gets r
 ```js
 import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
 
-Deno.mkdirSync(join(path, 'foo'), { recursive: true })
-Deno.writeTextFileSync(join(path, 'foo/A.txt'), 'Hello world')
-Deno.removeSync(join(path, 'foo'), { recursive: true })
+Deno.mkdirSync(join('<PATH>', 'foo'), { recursive: true })
+Deno.writeTextFileSync(join('<PATH>', 'foo/A.txt'), 'Hello world')
+Deno.removeSync(join('<PATH>', 'foo'), { recursive: true })
 ```
 
 **Result:**
@@ -468,25 +474,25 @@ Deno.removeSync(join(path, 'foo'), { recursive: true })
   /* All platforms */
   {
     kind: "create",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/wqaw5fl3l/foo" ]
+    paths: [ "<PATH>/__TEST__/wqaw5fl3l/foo" ]
   },
   {
     kind: "modify",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/wqaw5fl3l/foo/A.txt" ]
+    paths: [ "<PATH>/__TEST__/wqaw5fl3l/foo/A.txt" ]
   },
   /* Only on Linux */
   {
     kind: "access",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/wqaw5fl3l/foo/A.txt" ]
+    paths: [ "<PATH>/__TEST__/wqaw5fl3l/foo/A.txt" ]
   },
   /* All platforms */
   {
     kind: "remove",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/wqaw5fl3l/foo/A.txt" ]
+    paths: [ "<PATH>/__TEST__/wqaw5fl3l/foo/A.txt" ]
   },
   {
     kind: "remove",
-    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/wqaw5fl3l/foo" ]
+    paths: [ "<PATH>/__TEST__/wqaw5fl3l/foo" ]
   }
 ]
 ```
