@@ -360,6 +360,20 @@ Deno.renameSync(join(path, 'A.txt'), join(path, 'B.txt'))
 [
   /* All platforms */
   {
+    kind: "create",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/omi3xk5p4/A.txt" ]
+  },
+  {
+    kind: "modify",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/omi3xk5p4/A.txt" ]
+  },
+  /* Only on Linux */
+  {
+    kind: "access",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/omi3xk5p4/A.txt" ]
+  },
+  /* All platforms */
+  {
     kind: "modify",
     paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/omi3xk5p4/A.txt" ]
   },
@@ -394,6 +408,10 @@ Deno.renameSync(join(path, 'foo'), join(path, 'bar'))
 ```js
 [
   /* All platforms */
+  {
+    kind: "create",
+    paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/1k8v51qih/foo" ]
+  },
   {
     kind: "modify",
     paths: [ "/home/runner/work/Deno.watchFs/Deno.watchFs/__TEST__/1k8v51qih/foo" ]
