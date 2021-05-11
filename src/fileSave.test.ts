@@ -6,7 +6,7 @@ it('should be able to track file saves', async () => {
         Deno.writeTextFileSync(join(path, 'A.txt'), '')
         setTimeout(() => {
             Deno.writeTextFileSync(join(path, 'A.txt'), 'Hello world')
-        }, 1200)
+        }, 900)
     })
     console.log(events)
     expect(events.length).toBeGreaterThanOrEqual(0)
