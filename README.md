@@ -7,6 +7,7 @@ Feel free to use it as reference when designing tools which rely on file watchin
 - [Notes](https://github.com/tommywalkie/Deno.watchFs#notes)
 - [Testing](https://github.com/tommywalkie/Deno.watchFs#testing)
 - [Behaviors](https://github.com/tommywalkie/Deno.watchFs#behaviors)
+  - [Add a new empty file](https://github.com/tommywalkie/Deno.watchFs#add-a-new-empty-file)
   - [Add a new file](https://github.com/tommywalkie/Deno.watchFs#add-a-new-file)
   - [Edit file](https://github.com/tommywalkie/Deno.watchFs#edit-a-file)
   - [Add a new folder](https://github.com/tommywalkie/Deno.watchFs#add-a-new-folder)
@@ -43,9 +44,36 @@ All the hereby documented behaviors here were tested with Deno APIs, these may n
 
 From my own experience, when using Visual Studio Code, additional `modify` events may be emitted on any scenario, _e.g._ 3~4 `modify` events may happen for a single file save.
 
+### Add a new empty file
+
+This is the equivalent of creating an empty file entry (`touch A.txt`).
+
+```js
+import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
+
+Deno.writeTextFileSync(join('<PATH>', 'A.txt'), '')
+```
+
+**Result:**
+
+```js
+[
+  /* All platforms */
+  {
+    kind: "create",
+    paths: [ "<PATH>/__TEST__/j3dset8ut/A.txt" ]
+  },
+  /* Only on Linux */
+  {
+    kind: "access",
+    paths: [ "<PATH>/__TEST__/j3dset8ut/A.txt" ]
+  }
+]
+```
+
 ### Add a new file
 
-This is the equivalent of creating a file entry and saving new content (`echo "Hello world" > A.txt`). 
+This is the equivalent of creating a file entry and saving new content (`echo "Hello world" > A.txt`).
 
 ```js
 import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
@@ -79,8 +107,8 @@ Deno.writeTextFileSync(join('<PATH>', 'A.txt'), 'Hello world')
 ```js
 import { join } from 'https://deno.land/std@0.95.0/path/mod.ts'
 
-Deno.writeTextFileSync(join('<PATH>', 'A.txt'), '')
-Deno.writeTextFileSync(join('<PATH>', 'A.txt'), 'Hello world')
+Deno.writeTextFileSync(join('<PATH>', 'A.txt'), 'Foo')
+Deno.writeTextFileSync(join('<PATH>', 'A.txt'), 'Bar')
 ```
 
 **Result:**
@@ -90,6 +118,10 @@ Deno.writeTextFileSync(join('<PATH>', 'A.txt'), 'Hello world')
   /* All platforms */
   {
     kind: "create",
+    paths: [ "<PATH>/__TEST__/jejw8egqf/A.txt" ]
+  },
+  {
+    kind: "modify",
     paths: [ "<PATH>/__TEST__/jejw8egqf/A.txt" ]
   },
   /* Only on Linux */
