@@ -23,12 +23,11 @@ Feel free to use it as reference when designing tools which rely on file watchin
 
 I've been using [The Event Guide](https://github.com/notify-rs/notify/wiki/The-Event-Guide#platform-specific-behaviour) from `notify` wiki, but here a few notes from my tests:
 
-- Obviously, path format in `event.paths` depends of the OS (slashes, antislashes, etc.).
-- `Deno.FsEvent` doesn't provide stats so you'll' need to call `lstatSync` for each event to process `event.paths` entries.
-- From CI logs, MacOS filesystem operations are _way slower_. the first `mkdir` command may not be completed before  `Deno.watchFs` is being used, _i.e._ this is why it may first emit a `create` event for the watched source.
-- On Windows, `modify` events can be both content and metadata changes (file size included), you may need to periodically de-duplicate `modify` events.
-- Linux is the only OS granted with `access` events and `modify` events including two paths.
-- If your use case is tracking files, consider using `walkSync` to retrieve existing entries when running `Deno.watchFs`, then when new folders gets added and when some `modify` event happens with a folder (this can be either moves, renames or removals), because folder items' events won't happen.
+- Path format (`/`, `\\`, etc.) in `event.paths` depends of the OS.
+- `Deno.FsEvent` doesn't provide `FileInfo` fields, you may then need to call `lstatSync` to process `event.paths`, the downside is `lstatSync` is not fast enough between quick ops (like creating a file and immediatly deleting it).
+- MacOS filesystem operations seem to be _very slow_ in CI. the first `mkdirSync` command may not be completed before  starting watching the newly created folder with `Deno.watchFs`, _i.e._ this is why it may first emit a `create` event.
+- Linux is the only OS granted with `access` events.
+- Linux is the only OS granted with `modify` events including two paths, which can be useful for tracking moves and renames, the downside is these events always happen last.
 
 ## Testing
 
@@ -39,6 +38,10 @@ deno test -A --unstable
 ```
 
 ## Behaviors
+
+All the hereby documented behaviors here were tested with Deno APIs, these may not reflect the ones you'll get when interacting with the watched source using any third-party tool.
+
+From my own experience, when using Visual Studio Code, additional `modify` events may be emitted on any scenario, _e.g._ 3~4 `modify` events may happen for a single file save.
 
 ### Add a new file
 
